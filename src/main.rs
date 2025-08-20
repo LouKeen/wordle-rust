@@ -25,14 +25,14 @@ fn main() {
                 let current_char = guess.chars().nth(n).unwrap();
 
                 if current_char == word.chars().nth(n).unwrap() {
-                    print!("*")
+                    print!("\x1b[92m{}\x1b[0m", current_char)
                 } else if word.contains(current_char) {
-                    print!("+")
+                    print!("\x1b[93m{}\x1b[0m", current_char)
                 } else {
-                    print!("-")
+                    print!("\x1b[91m{}\x1b[0m", current_char)
                 }
             }
-            println!()
+            println!();
         }
     }
 }
