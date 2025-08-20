@@ -2,6 +2,7 @@ use std::io::stdin;
 
 fn main() {
     let word: &str = "abcde";
+
     loop {
         println!("Guess the secret word:");
 
@@ -20,7 +21,18 @@ fn main() {
             println!("You win!");
             break;
         } else {
-            println!("You lose!");
+            for n in 0..5 {
+                let current_char = guess.chars().nth(n).unwrap();
+
+                if current_char == word.chars().nth(n).unwrap() {
+                    print!("*")
+                } else if word.contains(current_char) {
+                    print!("+")
+                } else {
+                    print!("-")
+                }
+            }
+            println!()
         }
     }
 }
