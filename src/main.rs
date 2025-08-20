@@ -9,7 +9,14 @@ fn main() {
 
         stdin().read_line(&mut guess).expect("Failed to read line");
 
-        if word.eq(guess.trim()) {
+        let guess = guess.trim();
+
+        if guess.len() != 5 {
+            println!("word must be exactly 5 letters");
+            continue;
+        }
+
+        if word.eq(guess) {
             println!("You win!");
             break;
         } else {
