@@ -3,6 +3,8 @@ use std::io::stdin;
 fn main() {
     let word: &str = "abcde";
 
+    let mut turn: u8 = 0;
+
     loop {
         println!("Guess the secret word:");
 
@@ -21,18 +23,22 @@ fn main() {
             println!("You win!");
             break;
         } else {
-            for n in 0..5 {
-                let current_char = guess.chars().nth(n).unwrap();
-
-                if current_char == word.chars().nth(n).unwrap() {
-                    print!("\x1b[92m{}\x1b[0m", current_char)
-                } else if word.contains(current_char) {
-                    print!("\x1b[93m{}\x1b[0m", current_char)
+            for (i, c) in guess.chars().enumerate() {
+                if c == word.chars().nth(i).unwrap() {
+                    let x = "\x1b[92mx\x1b[0m";
+                    print!("{}", x);
+                } else if word.contains(c) {
+                    print!("\x1b[93m{}\x1b[0m", c)
                 } else {
-                    print!("\x1b[91m{}\x1b[0m", current_char)
+                    print!("\x1b[91m{}\x1b[0m", c)
                 }
             }
             println!();
+        }
+        turn += 1;
+        if turn == 6 {
+            println!("You lose!");
+            break;
         }
     }
 }
