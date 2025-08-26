@@ -1,4 +1,5 @@
 use std::io::stdin;
+use wordle_rust::validate_answer;
 
 fn main() {
     let word: &str = "abcde";
@@ -14,8 +15,7 @@ fn main() {
 
         let guess = guess.trim();
 
-        if guess.len() != 5 {
-            println!("word must be exactly 5 letters");
+        if validate_answer(guess) {
             continue;
         }
 
