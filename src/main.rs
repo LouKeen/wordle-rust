@@ -4,7 +4,9 @@ use wordle_rust::validate_answer;
 fn main() {
     let word: &str = "abcde";
 
-    let mut turn: u8 = 0;
+    let mut guesses: [String; 6] = std::array::from_fn(|_| String::new());
+
+    let mut turn: usize = 0;
 
     loop {
         println!("Guess the secret word:");
@@ -13,13 +15,14 @@ fn main() {
 
         stdin().read_line(&mut guess).expect("Failed to read line");
 
-        let guess = guess.trim();
+        let trimmmed_len = guess.trim_end().len();
+        guess.truncate(trimmmed_len);
 
-        if validate_answer(guess) {
+        if validate_answer(guess.as_str()) {
             continue;
         }
 
-        if word.eq(guess) {
+        if word == guess {
             println!("You win!");
             break;
         } else {
@@ -33,7 +36,8 @@ fn main() {
                     print!("\x1b[91m{}\x1b[0m", c)
                 }
             }
-            println!();
+            guesses[turn] = guess;
+            println!("{:?}", guesses);
         }
         turn += 1;
         if turn == 6 {
