@@ -15,8 +15,8 @@ fn main() {
 
         stdin().read_line(&mut guess).expect("Failed to read line");
 
-        let trimmmed_len = guess.trim_end().len();
-        guess.truncate(trimmmed_len);
+        let trimmed_len = guess.trim_end().len();
+        guess.truncate(trimmed_len);
 
         if validate_answer(guess.as_str()) {
             continue;
